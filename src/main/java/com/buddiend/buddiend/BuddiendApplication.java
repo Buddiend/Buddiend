@@ -8,9 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 @ServletComponentScan
 public class BuddiendApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(BuddiendApplication.class, args);
     }
-
 }
