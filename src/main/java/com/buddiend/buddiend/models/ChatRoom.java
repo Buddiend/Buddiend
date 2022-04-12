@@ -2,11 +2,13 @@ package com.buddiend.buddiend.models;
 
 import java.util.List;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "chat_rooms")
 public class ChatRoom {
 
@@ -43,10 +45,6 @@ public class ChatRoom {
                     updatable = false,
                     nullable = false))
     private List<Language> languages;
-
-    public ChatRoom() {
-
-    }
 
     public ChatRoom(String name, String description, Topic topic_id) {
         this.name = name;

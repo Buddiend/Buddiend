@@ -2,6 +2,7 @@ package com.buddiend.buddiend.models;
 
 import com.buddiend.buddiend.models.enumerations.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -67,10 +69,6 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.name = name;
-    }
-
-    public User() {
-
     }
 
     public void setDeleteDate() {

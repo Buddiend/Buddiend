@@ -1,11 +1,13 @@
 package com.buddiend.buddiend.models;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "topics")
 public class Topic {
 
@@ -15,9 +17,6 @@ public class Topic {
 
     @Column(nullable = false)
     private String name;
-
-    public Topic() {
-    }
 
     public Topic(Long id, String name) {
         this.id = id;

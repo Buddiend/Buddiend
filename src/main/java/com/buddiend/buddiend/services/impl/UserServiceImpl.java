@@ -1,33 +1,45 @@
 package com.buddiend.buddiend.services.impl;
 
+import com.buddiend.buddiend.models.PasswordReset;
 import com.buddiend.buddiend.models.User;
 import com.buddiend.buddiend.models.dto.UserRegisterDto;
 import com.buddiend.buddiend.models.enumerations.Role;
+import com.buddiend.buddiend.repositories.PasswordResetRepository;
 import com.buddiend.buddiend.repositories.UserRepository;
 import com.buddiend.buddiend.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordResetRepository passwordResetRepository;
 
-    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+
+    public UserServiceImpl(UserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder, PasswordResetRepository passwordResetRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.passwordResetRepository = passwordResetRepository;
+    }
+
+    @Override
+    public UserDetails getUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            return (UserDetails) principal;
+        }
+
+        return null;
     }
 
     @Override
@@ -48,6 +60,12 @@ public class UserServiceImpl implements UserService {
                 passwordEncoder.encode(userRegisterDto.getPassword()),
                 Role.ROLE_USER);
         return this.userRepository.save(user);
+    }
+
+    @Override
+    public void createPasswordResetToken(User user, String token) {
+        PasswordReset newToken = new PasswordReset(user, token);
+        this.passwordResetRepository.save(newToken);
     }
 
     @Override
