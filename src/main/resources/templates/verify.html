@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification Page</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <h1>Verification</h1>
+
+            <form th:action="@{/verify}" method="post">
+
+                <div class="form-group">
+                    <label class="control-label" for="verification_code"> Verification Code </label>
+                    <input type="hidden" th:value="${session.user_to_register}" name="email">
+                    <input
+                        id="verification_code" class="form-control" required
+                        autofocus="autofocus"
+                        type="text"
+                        name="verification_code"
+                    />
+                    <input type="submit">
+                </div>
+
+            </form>
+
+            <form th:action="@{/verify/resendCode}" method="post">
+
+                <div class="form-group">
+                    <input type="hidden" th:value="${session.user_to_register}" name="email">
+                    <input type="submit" value="Resend Code">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.buddiend.buddiend.models;
 import com.buddiend.buddiend.models.enumerations.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +39,11 @@ public class User implements UserDetails {
 
     private String profile_picture;
 
+    @Column(unique = true, length = 6)
+    private String verification_code;
+
+    private LocalDateTime verification_code_created_at;
+
     private String location;
 
     @CreatedDate
@@ -69,6 +75,8 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.verification_code = RandomString.make(6).toUpperCase();
+        this.verification_code_created_at = LocalDateTime.now();
     }
 
     public void setDeleteDate() {
@@ -78,7 +86,7 @@ public class User implements UserDetails {
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
+    private boolean isEnabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

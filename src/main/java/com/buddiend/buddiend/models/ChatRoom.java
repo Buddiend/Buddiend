@@ -21,6 +21,13 @@ public class ChatRoom {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "id"
+    )
+    private User user_id;
+
     @Column(nullable = false)
     private String slug;
 
