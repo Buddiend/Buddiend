@@ -10,4 +10,5 @@ public interface AuthService {
     void changePassword(ChangePasswordDto changePasswordDto);
     boolean validateToken(String token);
     void delete(User user);
+
 }

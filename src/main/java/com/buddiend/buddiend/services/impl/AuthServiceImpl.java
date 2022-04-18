@@ -76,7 +76,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private User getUserFromEmail (String email) {
-        return this.userService.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return this.userService.findByEmail(email);
     }
 
     private boolean isTokenValid(PasswordReset passwordReset) {
@@ -85,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public User getUserFromToken(PasswordReset passwordReset) {
-        return this.userService.findByEmail(passwordReset.getUser().getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return this.userService.findByEmail(passwordReset.getUser().getEmail());
     }
 
     private PasswordReset getPasswordResetFromToken (String token) {
