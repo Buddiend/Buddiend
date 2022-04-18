@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.empty();
+        return this.userRepository.findByEmail(email);
     }
 
     @Override
