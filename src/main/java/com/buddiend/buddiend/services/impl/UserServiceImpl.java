@@ -111,7 +111,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //TODO: Implement it somewhere
     @Override
     public void resendVerificationCode(String email) throws MessagingException, UnsupportedEncodingException {
         User user = this.findByEmail(email);

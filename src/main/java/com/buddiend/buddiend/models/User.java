@@ -4,6 +4,8 @@ import com.buddiend.buddiend.models.enumerations.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.utility.RandomString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,11 +48,13 @@ public class User implements UserDetails {
 
     private String location;
 
-    @CreatedDate
-    private LocalDateTime created_at;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created_at;
 
-    @LastModifiedDate
-    private LocalDateTime updated_at;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated_at;
 
     private LocalDateTime deleted_at;
 

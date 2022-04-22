@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Verification Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <div class="container">
@@ -27,16 +28,39 @@
 
             </form>
 
-            <form th:action="@{/verify/resendCode}" method="post">
+            <form th:action="@{/verify/resend}" th:method="put" id="resendForm">
 
                 <div class="form-group">
                     <input type="hidden" th:value="${session.user_to_register}" name="email">
-                    <input type="submit" value="Resend Code">
+                    <button type="submit" value="Resend Code" >Resend</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+<script>
+    $("#resendForm").submit(function (e){
+        e.preventDefault();
+        let formData = new FormData(this);
+        $.ajax({
+            url: "/verify/resend",
+            processData: false,
+            contentType: false,
+            cache: false,
+            type: "PUT",
+            data: formData,
+            success: function (data, response){
+                console.log(data);
+                console.log(response);
+            },
+            error: function (data, response){
+                console.log(response);
+            }
+        })
+        debugger;
+
+    })
+</script>
 </body>
 </html>

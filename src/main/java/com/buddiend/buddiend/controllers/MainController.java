@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class MainController {
+
     @GetMapping
     public String showHomePage() {
         return "test";
@@ -26,4 +27,5 @@ public class MainController {
 
         return "redirect:/";
     }
+
 }
