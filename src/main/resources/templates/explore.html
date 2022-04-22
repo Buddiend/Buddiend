@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <div class="container">
+        <h1>START A CONVERSATION</h1>
+        <a href="/start-conversation" class="btn btn-secondary" role="button">Start a conversation</a>
+    </div>
+    <div class="container">
+        <h2>Choose from a variety of topics</h2>
+        <a href="#" class="btn btn-primary" role="button" th:each="topic:${topics}" th:text="${topic.getName()}"/>
+        <br>
+        <a href="/onboarding" class="btn btn-secondary" role="button">View All</a>
+
+    </div>
+    <div class="container" th:each="topic : ${subscribedTopics}">
+        <h2>Get started with <span th:text="${topic.getName()}"/></h2>
+        <div class="container border border-primary"
+             th:each="room : ${chatRooms}"
+             th:if="${room.getTopic().getId() == topic.getId()}">
+            <h1 th:text="${room.getName()}"/>
+            <a href="#" class="btn btn-secondary" role="button">Join now</a>
+        </div>
+        <a href="#" class="btn btn-secondary" role="button">View All</a>
+
+    </div>
+</div>
+</body>
+</html>

@@ -31,9 +31,11 @@ public class VerificationController {
     }
 
     @PostMapping
-    public String verify(@RequestParam String email, @RequestParam String verification_code){
+    public String verify(@RequestParam String email, @RequestParam String verification_code, HttpServletRequest request){
 
         this.userService.verify(email, verification_code);
+        request.getSession().invalidate();
+
         return "redirect:/login";
     }
 

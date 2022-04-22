@@ -1,8 +1,10 @@
 package com.buddiend.buddiend.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 
 import javax.persistence.*;
 
@@ -36,26 +38,21 @@ public class ChatRoom {
             name = "topic_id",
             referencedColumnName = "id"
     )
-    private Topic topic_id;
+    private Topic topic;
 
-    @ManyToMany
-    @JoinTable(
-            name = "chat_room_has_languages",
-            joinColumns = @JoinColumn(
-                    name = "chat_room_id",
-                    referencedColumnName = "id",
-                    updatable = false,
-                    nullable = false),
-            inverseJoinColumns = @JoinColumn(
-                    name = "language_id",
-                    referencedColumnName = "id",
-                    updatable = false,
-                    nullable = false))
-    private List<Language> languages;
+    @ManyToOne
+    @JoinColumn(
+            name = "language_id",
+            referencedColumnName = "id"
+    )
+    private Language language;
 
-    public ChatRoom(String name, String description, Topic topic_id) {
+    public ChatRoom(String name, String description, Topic topic_id, User user_id, Language language) {
         this.name = name;
         this.description = description;
-        this.topic_id = topic_id;
+        this.topic = topic_id;
+        this.user_id = user_id;
+        this.language = language;
+        this.slug = RandomString.make(10);
     }
 }

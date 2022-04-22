@@ -1,11 +1,20 @@
 package com.buddiend.buddiend.services.impl;
 
 import com.buddiend.buddiend.models.ChatRoom;
+import com.buddiend.buddiend.models.Language;
 import com.buddiend.buddiend.models.Topic;
+import com.buddiend.buddiend.models.User;
+import com.buddiend.buddiend.models.exceptions.LanguageNotFoundException;
+import com.buddiend.buddiend.models.exceptions.TopicNotFoundException;
+import com.buddiend.buddiend.models.exceptions.UserNotFoundException;
 import com.buddiend.buddiend.repositories.ChatRoomRepository;
+import com.buddiend.buddiend.repositories.LanguageRepository;
+import com.buddiend.buddiend.repositories.TopicRepository;
+import com.buddiend.buddiend.repositories.UserRepository;
 import com.buddiend.buddiend.services.ChatRoomService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +22,15 @@ import java.util.Optional;
 public class ChatRoomServiceImpl implements ChatRoomService {
 
     private final ChatRoomRepository chatRoomsRepository;
+    private final UserRepository userRepository;
+    private final TopicRepository topicRepository;
+    private final LanguageRepository languageRepository;
 
-    public ChatRoomServiceImpl(ChatRoomRepository chatRoomsRepository) {
+    public ChatRoomServiceImpl(ChatRoomRepository chatRoomsRepository, UserRepository userRepository, TopicRepository topicRepository, LanguageRepository languageRepository) {
         this.chatRoomsRepository = chatRoomsRepository;
+        this.userRepository = userRepository;
+        this.topicRepository = topicRepository;
+        this.languageRepository = languageRepository;
     }
 
     @Override
@@ -38,8 +53,34 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return Optional.empty();
     }
 
+
     @Override
-    public Optional<ChatRoom> findByTopic(Topic topic) {
-        return Optional.empty();
+    public List<ChatRoom> findByTopics(List<Topic> topics) {
+
+        List<ChatRoom> chatRooms = new ArrayList<>();
+
+        topics.forEach(el -> {
+            List<ChatRoom> temp = this.chatRoomsRepository.findByTopic(el);
+            if(temp != null) {
+                chatRooms.addAll(temp);
+            }
+        });
+
+        return chatRooms;
+    }
+
+
+    @Override
+    public Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email) {
+        User creationUser = this.userRepository.findByEmail(email)
+                .orElseThrow(UserNotFoundException :: new);
+        Topic topic = this.topicRepository.findById(topicId)
+                .orElseThrow(() -> new TopicNotFoundException(topicId));
+        Language language = this.languageRepository.findById(languageId)
+                .orElseThrow(() -> new LanguageNotFoundException(languageId));
+
+        ChatRoom chatRoom = new ChatRoom(title, description, topic, creationUser, language);
+
+        return Optional.of(this.chatRoomsRepository.save(chatRoom));
     }
 }
