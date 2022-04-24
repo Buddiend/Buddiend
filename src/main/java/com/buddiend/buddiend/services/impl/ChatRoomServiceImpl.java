@@ -7,6 +7,7 @@ import com.buddiend.buddiend.models.User;
 import com.buddiend.buddiend.models.exceptions.LanguageNotFoundException;
 import com.buddiend.buddiend.models.exceptions.TopicNotFoundException;
 import com.buddiend.buddiend.models.exceptions.UserNotFoundException;
+import com.buddiend.buddiend.models.exceptions.VideoChatNotFoundException;
 import com.buddiend.buddiend.repositories.ChatRoomRepository;
 import com.buddiend.buddiend.repositories.LanguageRepository;
 import com.buddiend.buddiend.repositories.TopicRepository;
@@ -53,6 +54,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<ChatRoom> findByMeetingId(String meetingId) {
+        return Optional.ofNullable(this.chatRoomsRepository.findByMeetingId(meetingId)
+                .orElseThrow(VideoChatNotFoundException::new));
+    }
+
 
     @Override
     public List<ChatRoom> findByTopics(List<Topic> topics) {
@@ -71,7 +78,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 
     @Override
-    public Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email) {
+    public Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email, String meetingId) {
         User creationUser = this.userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException :: new);
         Topic topic = this.topicRepository.findById(topicId)
@@ -79,7 +86,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         Language language = this.languageRepository.findById(languageId)
                 .orElseThrow(() -> new LanguageNotFoundException(languageId));
 
-        ChatRoom chatRoom = new ChatRoom(title, description, topic, creationUser, language);
+        ChatRoom chatRoom = new ChatRoom(title, description, topic, creationUser, language, meetingId);
 
         return Optional.of(this.chatRoomsRepository.save(chatRoom));
     }

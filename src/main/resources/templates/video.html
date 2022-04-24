@@ -5,20 +5,27 @@
     <title>Title</title>
 </head>
 <body>
+<input type="hidden" id="meetingId" th:value="${meetingId}"/>
+<input type="hidden" id="name" th:value="${name}"/>
+<input type="hidden" id="title" th:value="${title}"/>
 
 <script>
-    var script = document.createElement("script");
+    const meetingId = document.getElementById('meetingId').value;
+    const name = document.getElementById('name').value;
+    const title = document.getElementById('title').value;
+
+    let script = document.createElement("script");
     script.type = "text/javascript";
 
     script.addEventListener("load", function (event) {
         const meeting = new VideoSDKMeeting();
 
         const config = {
-            name: "Viktor Gavrilovic",
+            name: name,
             apiKey: "354a7b83-9444-41dd-97ca-c90f81db7763",
-            meetingId: "EDTECH_DEMO",
+            meetingId: meetingId,
 
-            redirectOnLeave: "https://www.videosdk.live/",
+            redirectOnLeave: "http://localhost:9090/explore",
 
             micEnabled: true,
             webcamEnabled: true,
@@ -30,9 +37,9 @@
 
             screenShareEnabled: true,
 
-            brandingEnabled: true,
+            brandingEnabled: false,
             brandLogoURL: "",
-            brandName: "Entrepreneurship",
+            brandName: "Buddiend",
             poweredBy: false,
 
             // permissions: {
@@ -46,7 +53,7 @@
 
             joinScreen: {
                 visible: false, // Show the join screen ?
-                title: "EdTech Quick start", // Meeting title
+                title: title, // Meeting title
                 meetingUrl: window.location.href, // Meeting joining url
             },
         };
@@ -56,7 +63,6 @@
 
     script.src = "https://sdk.videosdk.live/rtc-js-prebuilt/0.1.29/rtc-js-prebuilt.js";
     document.getElementsByTagName("head")[0].appendChild(script);
-
 </script>
 </body>
 </html>

@@ -11,9 +11,7 @@ public interface ChatRoomService {
     Optional<ChatRoom> findById(Long id);
     Optional<ChatRoom> findByName(String name);
     Optional<ChatRoom> findBySlug(String slug);
+    Optional<ChatRoom> findByMeetingId(String meetingId);
     List<ChatRoom> findByTopics(List<Topic> topics);
-    Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email);
-
-
-
+    Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email, String meetingId);
 }

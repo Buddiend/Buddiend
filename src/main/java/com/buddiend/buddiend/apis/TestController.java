@@ -20,7 +20,7 @@ package com.buddiend.buddiend.apis;
 //
 //    @GetMapping
 //    public String getTest() {
-//        return "test.html";
+//        return "video.html";
 //    }
 //
 ////    @GetMapping

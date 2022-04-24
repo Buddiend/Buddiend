@@ -50,11 +50,8 @@ public class VideoController {
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-    @RequestMapping(
-            value="/get-token",
-            method= RequestMethod.GET,
-            produces = "application/json"
-    )
+    @GetMapping(value="/get-token",
+            produces = "application/json")
     public JSONObject generateToken() {
         Map<String, Object> payload = new HashMap<>();
 
@@ -71,9 +68,8 @@ public class VideoController {
         return tokenJsonObject;
     }
 
-    @RequestMapping(
+    @PostMapping(
             value="/create-meeting",
-            method=RequestMethod.POST,
             produces = "application/json"
     )
     public String createMeeting(@RequestBody String requestBody) throws IOException, InterruptedException, ParseException {
@@ -97,9 +93,8 @@ public class VideoController {
     }
 
 
-    @RequestMapping(
+    @PostMapping(
             value="/validate-meeting/{meetingId}",
-            method=RequestMethod.POST,
             produces = "application/json"
     )
     public String validateMeeting(@RequestBody String requestBody,@PathVariable String meetingId) throws ParseException, IOException, InterruptedException {

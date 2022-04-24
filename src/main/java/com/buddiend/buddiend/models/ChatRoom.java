@@ -47,12 +47,16 @@ public class ChatRoom {
     )
     private Language language;
 
-    public ChatRoom(String name, String description, Topic topic_id, User user_id, Language language) {
+    @Column(nullable = false)
+    private String meetingId;
+
+    public ChatRoom(String name, String description, Topic topic_id, User user_id, Language language, String meetingId) {
         this.name = name;
         this.description = description;
         this.topic = topic_id;
         this.user_id = user_id;
         this.language = language;
         this.slug = RandomString.make(10);
+        this.meetingId = meetingId;
     }
 }
