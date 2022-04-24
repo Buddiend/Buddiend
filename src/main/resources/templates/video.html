@@ -5,11 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<input type="hidden" id="meetingId" th:value="${meetingId}"/>
+<input type="hidden" id="meetingId" th:value="${chatRoom.getMeetingId()}"/>
 <input type="hidden" id="name" th:value="${name}"/>
-<input type="hidden" id="title" th:value="${title}"/>
+<input type="hidden" id="title" th:value="${chatRoom.getName()}"/>
 
 <script>
+    const base_url = window.location.origin;
     const meetingId = document.getElementById('meetingId').value;
     const name = document.getElementById('name').value;
     const title = document.getElementById('title').value;
@@ -25,7 +26,7 @@
             apiKey: "354a7b83-9444-41dd-97ca-c90f81db7763",
             meetingId: meetingId,
 
-            redirectOnLeave: "http://localhost:9090/explore",
+            redirectOnLeave: base_url + "/explore",
 
             micEnabled: true,
             webcamEnabled: true,

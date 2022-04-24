@@ -23,8 +23,8 @@
         <div class="container border border-primary"
              th:each="room : ${chatRooms}"
              th:if="${room.getTopic().getId() == topic.getId()}">
-            <h1 th:text="${room.getName()}"/>
-            <a href="#" class="btn btn-secondary" role="button">Join now</a>
+                <h1 th:text="${room.getName()}"/>
+                <a th:href="@{/video/{meetingId}(meetingId = ${room.getMeetingId()})}" class="btn btn-secondary" role="button">Join now</a>
         </div>
         <a href="#" class="btn btn-secondary" role="button">View All</a>
 

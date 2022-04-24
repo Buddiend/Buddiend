@@ -32,9 +32,8 @@ public class VideoChatController {
         String name = this.userService.findByEmail(email).getName();
         ChatRoom chatRoom = this.chatRoomService.findByMeetingId(meetingId).get();
 
-        model.addAttribute("meetingId", meetingId);
+        model.addAttribute("chatRoom", chatRoom);
         model.addAttribute("name", name);
-        model.addAttribute("title", chatRoom.getName());
 
         return "video";
     }
