@@ -2,6 +2,7 @@ package com.buddiend.buddiend.services.impl;
 
 import com.buddiend.buddiend.models.Topic;
 import com.buddiend.buddiend.models.User;
+import com.buddiend.buddiend.models.exceptions.TopicNotFoundException;
 import com.buddiend.buddiend.models.exceptions.UserNotFoundException;
 import com.buddiend.buddiend.repositories.TopicRepository;
 import com.buddiend.buddiend.repositories.UserRepository;
@@ -28,8 +29,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Optional<Topic> findById(Long id) {
-        return this.topicsRepository.findById(id);
+    public Topic findById(Long id) {
+        return this.topicsRepository.findById(id).orElseThrow(() -> new TopicNotFoundException(id));
     }
 
     @Override

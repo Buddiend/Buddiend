@@ -8,7 +8,7 @@ import java.util.*;
 public interface TopicService {
 
     List<Topic> findAll();
-    Optional<Topic> findById(Long id);
+    Topic findById(Long id);
     Optional<Topic> findByName(String name);
     List<Topic> findSelected(String email);
     Optional<User> assignTopicsToUser(List<Topic> topicsToAdd, String email);

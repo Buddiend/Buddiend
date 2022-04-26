@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.mail.MessagingException;
@@ -53,5 +54,15 @@ public class ExploreController {
         model.addAttribute("chatRooms", chatRooms);
 
         return "explore";
+    }
+
+    @GetMapping("/topic/{id}")
+    public String getTopicPage(@PathVariable Long id, Model model){
+        Topic selectedTopic = this.topicService.findById(id);
+        List<ChatRoom> chatRooms = this.chatRoomService.findByTopics(List.of(selectedTopic));
+        model.addAttribute("topic", selectedTopic);
+        model.addAttribute("chatRooms", chatRooms.isEmpty() ? null : chatRooms);
+
+        return "topic";
     }
 }

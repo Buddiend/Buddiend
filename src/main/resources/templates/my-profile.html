@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <style>
+        img{
+            border-radius: 50%;
+            width: 200px;
+        }
+    </style>
+
+</head>
+<body>
+<h1>HOLA AMIGO</h1>
+
+<div class="container">
+    <div class="imageContainer">
+        <img th:src="${user.getProfile_picture()}" alt="Profile Picture">
+    </div>
+    <h2>Account Details</h2>
+    <a href="/profile/edit" th:if="${!isEditingMode}">Edit</a>
+    <a href="/profile" th:if="${isEditingMode}">Cancel</a>
+    <form th:action="@{/profile/edit}" th:method="post">
+        <div>
+            <label for="fullName">Full Name</label>
+            <p type="text" th:text="${user.getName()}" id="fullName" />
+
+            <label for="email">Email</label>
+            <input type="text" th:value="${user.getEmail()}" id="email"  th:disabled="${!isEditingMode}" name="email">
+
+            <label for="email">Username</label>
+            <input type="text" th:value="${user.getUsername()}" id="username" th:disabled="${!isEditingMode}" name="username">
+        </div>
+
+        <div>
+            <h2>Change Password</h2>
+            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
+                Velit officia consequat duis enim velit mollit.
+            </p>
+            <input type="text" th:if="${isEditingMode}" placeholder="Current password" name="currentPassword">
+            <input type="text" th:if="${isEditingMode}" placeholder="New password" name="newPassword">
+            <a href="/profile/edit" th:if="${!isEditingMode}">Change Password</a>
+        </div>
+
+        <button th:if="${isEditingMode}" type="submit">Save Changes</button>
+    </form>
+
+    <div th:if="${!isEditingMode}">
+        <h2>Delete Acc</h2>
+        <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
+            Velit officia consequat duis enim velit mollit.
+        </p>
+        <button>Delete Acc</button>
+    </div>
+</div>
+</body>
+</html>

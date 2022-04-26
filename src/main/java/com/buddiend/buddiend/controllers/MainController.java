@@ -13,7 +13,7 @@ public class MainController {
 
     @GetMapping
     public String showHomePage() {
-        return "video";
+        return "home";
     }
 
     @GetMapping("login")

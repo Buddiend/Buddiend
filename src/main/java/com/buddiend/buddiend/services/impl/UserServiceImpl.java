@@ -4,6 +4,7 @@ import com.buddiend.buddiend.models.PasswordReset;
 import com.buddiend.buddiend.models.User;
 import com.buddiend.buddiend.models.dto.UserRegisterDto;
 import com.buddiend.buddiend.models.enumerations.Role;
+import com.buddiend.buddiend.models.exceptions.PasswordMatchException;
 import com.buddiend.buddiend.repositories.PasswordResetRepository;
 import com.buddiend.buddiend.repositories.UserRepository;
 import com.buddiend.buddiend.services.EmailService;
@@ -74,6 +75,21 @@ public class UserServiceImpl implements UserService {
         this.emailService.sendVerificationEmail(user,"Verification code");
 
         return user;
+    }
+
+    @Override
+    public User edit(String email, String newEmail, String username, String currentPassword, String newPassword) {
+        User user = this.findByEmail(email);
+        user.setEmail(newEmail);
+        user.setUsername(username);
+        if (currentPassword != null && !currentPassword.equals("") && newPassword != null && !newPassword.equals("")){
+            if (!this.passwordEncoder.matches(currentPassword, user.getPassword())){
+                throw new PasswordMatchException("Current Password does not match");
+            }
+            user.setPassword(this.passwordEncoder.encode(newPassword));
+        }
+
+        return this.userRepository.save(user);
     }
 
     @Override

@@ -15,6 +15,7 @@ public interface UserService extends UserDetailsService {
     Optional<User> findByUsername(String username);
     User findByEmail(String email);
     User save (UserRegisterDto userRegisterDto) throws MessagingException, UnsupportedEncodingException;
+    User edit(String email, String newEmail, String username, String currentPassword, String newPassword);
     void createPasswordResetToken (User user, String token);
     void verify(String email, String verification_code);
     void resendVerificationCode(String email) throws MessagingException, UnsupportedEncodingException;

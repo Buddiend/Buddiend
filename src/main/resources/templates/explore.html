@@ -26,7 +26,7 @@
                 <h1 th:text="${room.getName()}"/>
                 <a th:href="@{/video/{meetingId}(meetingId = ${room.getMeetingId()})}" class="btn btn-secondary" role="button">Join now</a>
         </div>
-        <a href="#" class="btn btn-secondary" role="button">View All</a>
+        <a th:href="@{/explore/topic/{id}(id=${topic.getId()})}" class="btn btn-secondary" role="button">View All</a>
 
     </div>
 </div>
