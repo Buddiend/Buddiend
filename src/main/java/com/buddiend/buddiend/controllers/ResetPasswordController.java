@@ -16,7 +16,7 @@ public class ResetPasswordController {
         this.authService = authService;
     }
 
-    @GetMapping
+    @GetMapping("/{token}")
     public String showResetPasswordPage(@PathVariable String token) {
         boolean validated = this.authService.validateToken(token);
 

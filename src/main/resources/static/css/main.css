@@ -13,11 +13,15 @@ body.no-scroll {
 }
 a {
   text-decoration: none !important;
-  color: unset;
+  color: unset !important;
   display: block;
 }
 a:hover {
-  color: unset;
+  color: unset !important;
+}
+a.link {
+  color: #8323E0 !important;
+  display: inline !important;
 }
 .button {
   padding: 10px 28px;
@@ -41,7 +45,7 @@ a:hover {
   margin-bottom: 20px;
 }
 .form-input .input-desc {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0 0 3px 0;
 }
 .form-input .input-field {
