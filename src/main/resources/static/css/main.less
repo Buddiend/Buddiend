@@ -1,3 +1,78 @@
-p {
-  color: aquamarine;
+@colorPurple: #8323E0;
+@colorWhite: #FCFCFC;
+@colorBlack: #1D1E1F;
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif !important;
+  background-color: @colorWhite !important;
+
+  &.no-scroll {
+    overflow-y: hidden;
+    position: sticky;
+  }
 }
+
+a {
+  text-decoration: none !important;
+  color: unset;
+  display: block;
+
+  &:hover {
+    color: unset;
+  }
+}
+
+.button{
+  padding: 10px 28px;
+  border-radius: 7px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  width: max-content !important;
+
+  &.purple-full{
+    background-color: @colorPurple;
+    color: #FFFF;
+  }
+
+  &.no-color{
+    background-color: transparent;
+  }
+}
+
+.form-input{
+  position: relative;
+  margin-bottom: 20px;
+
+  .input-desc {
+    font-size: 12px;
+    margin: 0 0 3px 0;
+  }
+
+  .input-field {
+    font-size: 16px;
+    border: 1px solid @colorBlack;
+    padding: 10px 14px;
+    background: none;
+    border-radius: 8px;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &.textarea {
+      resize: vertical;
+      min-height: 185px;
+      max-height: 285px;
+    }
+  }
+}
+
+.page{
+  section{
+    margin: 80px 0;
+  }
+}
+
