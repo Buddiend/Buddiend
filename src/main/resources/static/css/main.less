@@ -1,78 +1,244 @@
 @colorPurple: #8323E0;
+@colorGreen: #0DC04A;
 @colorWhite: #FCFCFC;
 @colorBlack: #1D1E1F;
+@colorGray: #ACACAC;
+@colorGrayDarker: #ECECEC;
+@colorGrayDark: #989898;
+@colorGreenDarker: #109679;
 
 html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif !important;
-  background-color: @colorWhite !important;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    color: @colorBlack;
+    font-family: 'Poppins', sans-serif !important;
+    background-color: @colorWhite !important;
 
-  &.no-scroll {
-    overflow-y: hidden;
-    position: sticky;
-  }
+    &.no-scroll {
+        overflow-y: hidden;
+        position: sticky;
+    }
 }
 
 a {
-  text-decoration: none !important;
-  color: unset;
-  display: block;
-
-  &:hover {
+    text-decoration: none !important;
     color: unset;
-  }
-}
+    display: block;
 
-.button{
-  padding: 10px 28px;
-  border-radius: 7px;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  width: max-content !important;
-
-  &.purple-full{
-    background-color: @colorPurple;
-    color: #FFFF;
-  }
-
-  &.no-color{
-    background-color: transparent;
-  }
-}
-
-.form-input{
-  position: relative;
-  margin-bottom: 20px;
-
-  .input-desc {
-    font-size: 12px;
-    margin: 0 0 3px 0;
-  }
-
-  .input-field {
-    font-size: 16px;
-    border: 1px solid @colorBlack;
-    padding: 10px 14px;
-    background: none;
-    border-radius: 8px;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-
-    &.textarea {
-      resize: vertical;
-      min-height: 185px;
-      max-height: 285px;
+    &:hover {
+        color: unset;
     }
-  }
 }
 
-.page{
-  section{
-    margin: 80px 0;
-  }
+.fw-semi-bold {
+    font-weight: 600 !important;
+}
+
+.button {
+    padding: 10px 28px;
+    border-radius: 7px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: max-content !important;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.5s ease-in-out;
+
+    &.purple-full {
+        background-color: @colorPurple;
+        color: #FFFF;
+    }
+
+    &.green-full {
+        background-color: @colorGreen;
+        color: #FFFF;
+
+        &:hover {
+            background-color: @colorPurple;
+        }
+    }
+
+    &.white-full {
+        background-color: #FFFFFF;
+        color: @colorPurple;
+
+        &.green {
+            color: @colorGreenDarker;
+        }
+    }
+
+    &.purple-outline {
+        background-color: transparent;
+        color: @colorPurple;
+        border: 1px solid @colorPurple;
+
+        &:hover {
+            background-color: @colorPurple;
+            color: #FFFFFF;
+        }
+    }
+
+    &.no-color {
+        background-color: transparent;
+    }
+}
+
+.form-input {
+    position: relative;
+    margin-bottom: 20px;
+
+    .input-desc {
+        font-size: 12px;
+        margin: 0 0 3px 0;
+    }
+
+    .input-field {
+        font-size: 16px;
+        border: 1px solid @colorBlack;
+        padding: 10px 14px;
+        background: none;
+        border-radius: 8px;
+        transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+
+        &.textarea {
+            resize: vertical;
+            min-height: 185px;
+            max-height: 285px;
+        }
+    }
+}
+
+/* GENERAL ELEMENTS */
+.topic {
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 1px solid @colorBlack;
+    margin: 10px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: @colorBlack;
+        color: white;
+    }
+
+    &.mini {
+        font-size: 12px;
+        padding: 10px 15px;
+        background: @colorGrayDarker;
+        border: none;
+        margin: 0;
+    }
+}
+
+.chat-room-container {
+    //padding: 15px;
+
+    .chat-room-box {
+        background: #FFFFFF;
+        box-shadow: 0 4px 14px 4px rgba(0, 0, 0, 0.05);
+        border-radius: 16px;
+        padding: 30px;
+
+        .chat-room-inside {
+            .top-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .hosted {
+                    p {
+                        font-size: 10px;
+                        margin: 0;
+                    }
+
+                    .hosted-by {
+                        color: @colorGray;
+                    }
+                }
+            }
+
+            .room-info-container {
+                margin: 20px 0;
+
+                .title {
+                    font-size: 18px;
+                }
+
+                .description {
+                    font-size: 14px;
+                    margin-top: 3px;
+                    color: @colorGrayDark;
+                }
+
+                .title, .description {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+.full-width-action-box {
+    border-radius: 16px;
+    padding: 50px 80px;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &.purple {
+        background: linear-gradient(103.27deg, #C79AF3 8.35%, #8323E0 77.44%);
+    }
+
+    &.green {
+        background: linear-gradient(103.27deg, #70CDB9 8.35%, #109679 77.44%);
+    }
+}
+
+/* END OF GENERAL ELEMENTS */
+
+.page {
+    section {
+        margin: 80px 0;
+    }
+
+    &.explore {
+        section {
+
+            &.topics {
+                .topics-wrapper {
+                    .topic-cards {
+                        display: grid;
+                        grid-template-columns: auto auto auto auto auto;
+                    }
+                }
+            }
+        }
+    }
+
+    &.single-topic {
+        section {
+            &.topic-header {
+                .topic-header-container {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .left-part {
+                        position: absolute;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
