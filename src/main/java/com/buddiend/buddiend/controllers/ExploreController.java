@@ -52,16 +52,23 @@ public class ExploreController {
         model.addAttribute("topics", this.topicService.findAll());
         model.addAttribute("subscribedTopics", selectedTopics);
         model.addAttribute("chatRooms", chatRooms);
+        model.addAttribute("user", this.userService.findByEmail(email));
 
         return "explore";
     }
 
     @GetMapping("/topic/{id}")
     public String getTopicPage(@PathVariable Long id, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        String email = ((UserDetails)principal).getUsername();
+
         Topic selectedTopic = this.topicService.findById(id);
         List<ChatRoom> chatRooms = this.chatRoomService.findByTopics(List.of(selectedTopic));
+
         model.addAttribute("topic", selectedTopic);
         model.addAttribute("chatRooms", chatRooms.isEmpty() ? null : chatRooms);
+        model.addAttribute("user", this.userService.findByEmail(email));
 
         return "topic";
     }

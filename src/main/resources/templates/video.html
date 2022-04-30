@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${chatRoom?.getName() + ' | Buddiend'}"></title>
+
 </head>
 <body>
 <input type="hidden" id="meetingId" th:value="${chatRoom?.getMeetingId()}"/>
@@ -15,7 +16,7 @@
     const name = document.getElementById('name').value;
     const title = document.getElementById('title').value;
 
-    let script = document.createElement("script");
+    let script = document.createElement("script");2
     script.type = "text/javascript";
 
     script.addEventListener("load", function (event) {
@@ -38,9 +39,9 @@
 
             screenShareEnabled: true,
 
-            brandingEnabled: false,
-            brandLogoURL: "",
-            brandName: "Buddiend",
+            brandingEnabled: true,
+            brandLogoURL: "https://buddiend.com/images/logo_small.png",
+            brandName: title,
             poweredBy: false,
 
             // permissions: {
@@ -53,7 +54,7 @@
             },
 
             joinScreen: {
-                visible: false, // Show the join screen ?
+                visible: true, // Show the join screen ?
                 title: title, // Meeting title
                 meetingUrl: window.location.href, // Meeting joining url
             },

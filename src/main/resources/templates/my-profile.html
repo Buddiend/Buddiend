@@ -15,8 +15,38 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header w-100 d-flex justify-content-between align-items-center pt-3 pb-3">
+            <a class="navbar-brand" href="/explore">
+                <img th:src="@{/images/logo-black.svg}" class="logo" alt="Logo">
+            </a>
+            <div class="right-part pe-0 ps-5">
+                <div class="dropdown">
+                    <a class="user-profile-button dropdown-toggle" href="#" type="button" id="dropdownMenu"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-container">
+                            <div class="profile-picture-wrapper">
+                                <img th:src="${user.getProfile_picture()}"
+                                     class="profile-picture"
+                                     alt="Profile Picture">
+                            </div>
+                            <p class="mb-0 profile-username fw-semi-bold" th:text="${'@' + user.getUsername()}"></p>
+                        </div>
+                        <img th:src="@{/icons/arrow.svg}" class="icon-arrow" alt="Arrow">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
+                        <li><a class="dropdown-item" th:href="@{/profile}">My Profile</a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
 <main class="page profile">
-    <section class="profile" th:if="${!isEditingMode}">
+    <section class="profile first" th:if="${!isEditingMode}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -25,9 +55,19 @@
                             <h2 class="title text-center fw-semi-bold">My Profile</h2>
                         </div>
                         <div class="profile-picture-container mt-4 mb-3 d-flex justify-content-center">
-                            <div class="profile-picture-wrapper">
-                                <img class="profile-picture" th:src="${user.getProfile_picture()}"
-                                     th:alt="${user.getProfile_picture()}">
+                            <div class="main-container">
+                                <div class="profile-picture-wrapper">
+                                    <img class="profile-picture" th:src="${user.getProfile_picture()}"
+                                         th:alt="${user.getProfile_picture()}">
+                                </div>
+
+                                <a th:href="@{/profile/edit}" class="action-button">
+                                    <div class="circle">
+                                        <div class="icon">
+                                            <img th:src="@{/icons/edit-white.svg}" alt="Edit">
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -62,7 +102,7 @@
                                                     mollit.</p>
                                             </div>
                                             <div class="info-details col-12">
-                                                <a href="/profile/edit">
+                                                <a href="/profile/edit" class="button-tag">
                                                     <button class="button outline">Change Password</button>
                                                 </a>
                                             </div>
@@ -76,9 +116,8 @@
             </div>
         </div>
     </section>
-
     <form th:action="@{/profile/edit}" th:method="post" th:if="${isEditingMode}">
-        <section class="profile edit" th:if="${isEditingMode}">
+        <section class="profile edit first" th:if="${isEditingMode}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -87,9 +126,19 @@
                                 <h2 class="title text-center fw-semi-bold">Edit Profile</h2>
                             </div>
                             <div class="profile-picture-container mt-4 mb-3 d-flex justify-content-center">
-                                <div class="profile-picture-wrapper">
-                                    <img class="profile-picture" th:src="${user.getProfile_picture()}"
-                                         th:alt="${user.getProfile_picture()}">
+                                <div class="main-container">
+                                    <div class="profile-picture-wrapper">
+                                        <img class="profile-picture" th:src="${user.getProfile_picture()}"
+                                             th:alt="${user.getProfile_picture()}">
+                                    </div>
+
+                                    <a th:href="@{/profile}" class="action-button">
+                                        <div class="circle close">
+                                            <div class="icon">
+                                                <img th:src="@{/icons/close.svg}" alt="Close">
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row justify-content-center">

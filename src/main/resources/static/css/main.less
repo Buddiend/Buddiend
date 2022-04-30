@@ -1,5 +1,6 @@
 @colorPurple: #8323E0;
 @colorGreen: #0DC04A;
+@colorRed: #EA4335;
 @colorWhite: #FCFCFC;
 @colorBlack: #1D1E1F;
 @colorGray: #ACACAC;
@@ -36,6 +37,85 @@ a {
         display: inline-block !important;
     }
 
+    &.button-tag {
+        display: inline-block;
+    }
+}
+
+.navbar {
+    .navbar-header {
+        .navbar-brand {
+            .logo {
+                width: 150px;
+
+                &.purple {
+                    filter: invert(18%) sepia(79%) saturate(4382%) hue-rotate(268deg) brightness(88%) contrast(99%);
+                }
+            }
+        }
+
+        .right-part {
+            .dropdown {
+                .user-profile-button {
+                    display: flex;
+                    align-items: center;
+
+                    &::after {
+                        display: none;
+                    }
+
+                    .profile-container {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 40px;
+
+                        .profile-picture-wrapper {
+                            width: 50px;
+                            overflow: hidden;
+                            border-radius: 10px;
+                            height: 50px;
+                            margin-right: 10px;
+
+                            .profile-picture {
+                                width: 100%;
+                                object-fit: cover;
+                                height: 100%;
+                            }
+
+                            .profile-username {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 110px;
+                            }
+                        }
+                    }
+                }
+
+                .dropdown-menu {
+                    &.show {
+                        transform: translateY(10%);
+                        box-shadow: 0px 4px 26px 10px rgba(0, 0, 0, 0.03);
+                        border-radius: 10px;
+                        border: none;
+
+                        .dropdown-item.active, .dropdown-item:active {
+                            background-color: @colorPurple;
+                            color: #FFFFFF !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.icon-arrow {
+    width: 18px;
+
+    &.left {
+        transform: rotate(90deg);
+    }
 }
 
 .button {
@@ -48,6 +128,7 @@ a {
     overflow: hidden;
     width: max-content !important;
     min-height: 46px;
+    user-select: none;
 
     &.purple-full {
         background-color: @colorPurple;
@@ -96,6 +177,14 @@ a {
     font-weight: 600 !important;
 }
 
+form {
+    .form-input {
+        &:last-child {
+            margin-bottom: 40px;
+        }
+    }
+}
+
 .button {
     padding: 10px 28px;
     border-radius: 7px;
@@ -107,7 +196,7 @@ a {
     width: max-content !important;
     font-weight: bold;
     font-size: 14px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 
     &.purple-full {
         background-color: @colorPurple;
@@ -167,7 +256,8 @@ a {
     border: 1px solid @colorBlack;
     margin: 10px;
     text-align: center;
-    transition: all 0.3s ease-in-out;
+    user-select: none;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 
     &:hover {
         background-color: @colorBlack;
@@ -254,6 +344,10 @@ a {
 .page {
     section {
         padding: 80px 0;
+
+        &.first {
+            padding: 20px 0 80px;
+        }
     }
 
     &.explore {
@@ -297,16 +391,78 @@ a {
             &.profile {
                 .profile-container {
                     .profile-picture-container {
-                        .profile-picture-wrapper {
-                            width: 150px;
-                            height: 150px;
-                            border-radius: 10px;
-                            overflow: hidden;
+                        .main-container {
+                            position: relative;
 
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
+                            .profile-picture-wrapper {
+                                width: 150px;
+                                height: 150px;
+                                border-radius: 10px;
+                                overflow: hidden;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .action-button {
+                                position: absolute;
+                                bottom: -25px;
+                                right: -25px;
+
+                                &:hover {
+                                    .circle {
+                                        background: @colorPurple;
+
+                                        .icon {
+                                            img {
+                                                filter: none;
+                                            }
+                                        }
+
+                                        &.close {
+                                            background: #FFFFFF;
+
+                                            .icon {
+                                                img {
+                                                    filter: invert(1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .circle {
+                                    background: #FFFFFF;
+                                    box-shadow: 0px 4px 20px 2px rgba(0, 0, 0, 0.06);
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+
+                                    .icon {
+                                        img {
+                                            width: 25px;
+                                            height: 25px;
+                                            filter: invert(1);
+                                        }
+                                    }
+
+                                    &.close {
+                                        background: @colorRed;
+
+                                        .icon {
+                                            img {
+                                                filter: none;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
