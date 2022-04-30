@@ -63,6 +63,13 @@ a.link {
   min-height: 185px;
   max-height: 285px;
 }
+.form-input .input-field.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
 .fw-semi-bold {
   font-weight: 600 !important;
 }
@@ -189,7 +196,7 @@ a.link {
 }
 /* END OF GENERAL ELEMENTS */
 .page section {
-  margin: 80px 0;
+  padding: 80px 0;
 }
 .page.explore section.topics .topics-wrapper .topic-cards {
   display: grid;
@@ -204,6 +211,9 @@ a.link {
 .page.single-topic section.topic-header .topic-header-container .left-part {
   position: absolute;
   left: 0;
+}
+.page.profile.edit {
+  padding-bottom: 150px;
 }
 .page.profile section.profile .profile-container .profile-picture-container .profile-picture-wrapper {
   width: 150px;

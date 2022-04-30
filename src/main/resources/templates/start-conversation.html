@@ -35,7 +35,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5">
                     <div class="start-conversation">
-                        <h2 class="text-center">Start a Conversation</h2>
+                        <h2 class="text-center mb-5">Start a Conversation</h2>
                         <form>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="form-input">
@@ -56,14 +56,14 @@
                             </div>
                             <div class="form-input">
                                 <label for="topic">Category</label>
-                                <select name="topicId" id="topic" class="input-field w-100">
+                                <select name="topicId" id="topic" class="input-field select w-100">
                                     <option th:each="topic : ${topics}" th:value="${topic.getId()}"
                                             th:text="${topic.getName()}"></option>
                                 </select>
                             </div>
                             <div class="form-input">
                                 <label for="language">Language</label>
-                                <select name="languageId" id="language" class="input-field w-100">
+                                <select name="languageId" id="language" class="input-field select w-100">
                                     <option th:each="language:${languages}" th:value="${language.getId()}"
                                             th:text="${language.getName()}"></option>
                                 </select>

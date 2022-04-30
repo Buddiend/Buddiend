@@ -16,7 +16,7 @@
 </head>
 <body>
 <main class="page explore">
-    <section class="start-conversation">
+    <section class="start-conversation pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -27,7 +27,9 @@
                                     <div class="box-inside">
                                         <h3 class="title text-white"><strong>Start</strong> a conversation,
                                             anytime, from <strong>anywhere.</strong></h3>
-                                        <button class="button white-full mt-3">Start Conversation</button>
+                                        <a href="/start-conversation">
+                                            <button class="button white-full mt-3">Start Conversation</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +39,7 @@
             </div>
         </div>
     </section>
-    <section class="topics">
+    <section class="topics pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -54,7 +56,7 @@
             </div>
         </div>
     </section>
-    <section class="chat-room" th:each="topic : ${subscribedTopics}">
+    <section class="chat-room pb-0" th:each="topic : ${subscribedTopics}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
