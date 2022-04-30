@@ -63,6 +63,13 @@ a.button-tag {
   text-overflow: ellipsis;
   max-width: 110px;
 }
+.navbar .navbar-header .right-part .dropdown .user-profile-button .profile-container .profile-username {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  width: 120px;
+}
 .navbar .navbar-header .right-part .dropdown .dropdown-menu.show {
   transform: translateY(10%);
   box-shadow: 0px 4px 26px 10px rgba(0, 0, 0, 0.03);
@@ -210,37 +217,82 @@ form .form-input:last-child {
   border: none;
   margin: 0;
 }
+.topic.mini:hover {
+  color: #1D1E1F !important;
+}
 .chat-room-container .chat-room-box {
   background: #FFFFFF;
   box-shadow: 0 4px 14px 4px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   padding: 30px;
+  min-height: 248px;
 }
-.chat-room-container .chat-room-box .chat-room-inside .top-container {
+.chat-room-container .chat-room-box .chat-room-inside {
+  min-height: 187px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.chat-room-container .chat-room-box .chat-room-inside .top-container .hosted p {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .profile .profile-wrapper {
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .profile .profile-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .hosted-by-section p {
   font-size: 10px;
   margin: 0;
 }
-.chat-room-container .chat-room-box .chat-room-inside .top-container .hosted .hosted-by {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .hosted-by-section .hosted-by {
   color: #ACACAC;
 }
-.chat-room-container .chat-room-box .chat-room-inside .room-info-container {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .top-container .hosted .hosted-by-section .user {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  width: 120px;
+}
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .room-info-container {
   margin: 20px 0;
 }
-.chat-room-container .chat-room-box .chat-room-inside .room-info-container .title {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .room-info-container .title {
   font-size: 18px;
 }
-.chat-room-container .chat-room-box .chat-room-inside .room-info-container .description {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .room-info-container .description {
   font-size: 14px;
   margin-top: 3px;
   color: #989898;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
-.chat-room-container .chat-room-box .chat-room-inside .room-info-container .title,
-.chat-room-container .chat-room-box .chat-room-inside .room-info-container .description {
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .room-info-container .title,
+.chat-room-container .chat-room-box .chat-room-inside .chat-room-details .room-info-container .description {
   margin: 0;
 }
 .full-width-action-box {
@@ -278,6 +330,9 @@ form .form-input:last-child {
 .page.single-topic section.topic-header .topic-header-container .left-part {
   position: absolute;
   left: 0;
+}
+.page.single-topic section.topic-header .topic-header-container .left-part .go-back {
+  user-select: none;
 }
 .page.profile.edit {
   padding-bottom: 150px;

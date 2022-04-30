@@ -89,6 +89,14 @@ a {
                                 max-width: 110px;
                             }
                         }
+
+                        .profile-username {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 120px;
+                            width: 120px;
+                        }
                     }
                 }
 
@@ -274,6 +282,10 @@ form {
         background: @colorGrayDarker;
         border: none;
         margin: 0;
+
+        &:hover {
+            color: @colorBlack !important;
+        }
     }
 }
 
@@ -285,40 +297,88 @@ form {
         box-shadow: 0 4px 14px 4px rgba(0, 0, 0, 0.05);
         border-radius: 16px;
         padding: 30px;
+        min-height: 248px;
 
         .chat-room-inside {
-            .top-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+            min-height: 187px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
 
-                .hosted {
-                    p {
-                        font-size: 10px;
+            .chat-room-details {
+                .top-container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .hosted {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .profile {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .profile-wrapper {
+                                width: 35px;
+                                height: 35px;
+                                overflow: hidden;
+                                border-radius: 5px;
+                                margin-right: 10px;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+
+                        .hosted-by-section {
+                            p {
+                                font-size: 10px;
+                                margin: 0;
+                            }
+
+                            .hosted-by {
+                                color: @colorGray;
+                            }
+
+                            .user {
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 120px;
+                                width: 120px;
+                            }
+                        }
+                    }
+                }
+
+                .room-info-container {
+                    margin: 20px 0;
+
+                    .title {
+                        font-size: 18px;
+                    }
+
+                    .description {
+                        font-size: 14px;
+                        margin-top: 3px;
+                        color: @colorGrayDark;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        display: -webkit-box !important;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        white-space: normal;
+                    }
+
+                    .title, .description {
                         margin: 0;
                     }
-
-                    .hosted-by {
-                        color: @colorGray;
-                    }
-                }
-            }
-
-            .room-info-container {
-                margin: 20px 0;
-
-                .title {
-                    font-size: 18px;
-                }
-
-                .description {
-                    font-size: 14px;
-                    margin-top: 3px;
-                    color: @colorGrayDark;
-                }
-
-                .title, .description {
-                    margin: 0;
                 }
             }
         }
@@ -380,6 +440,10 @@ form {
                     .left-part {
                         position: absolute;
                         left: 0;
+
+                        .go-back {
+                            user-select: none;
+                        }
                     }
                 }
             }

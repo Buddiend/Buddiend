@@ -15,19 +15,21 @@
 <body>
 <nav class="navbar">
     <div class="container">
-        <div class="navbar-header w-100 d-flex justify-content-between align-items-center pt-3 pb-3">
-            <a class="navbar-brand" href="/explore">
-                <img th:src="@{/images/logo-black.svg}" class="logo" alt="Logo">
-            </a>
-            <div class="middle-part">
+        <div class="navbar-header w-100 d-flex align-items-center pt-3 pb-3">
+            <div class="left-part w-100">
+                <a class="navbar-brand mr-auto" href="/explore">
+                    <img th:src="@{/images/logo-black.svg}" class="logo" alt="Logo">
+                </a>
+            </div>
+            <div class="middle-part mx-auto">
                 <a th:href="@{/start-conversation}" class="button-tag">
                     <button class="button purple-full" type="submit">Start Conversation</button>
                 </a>
             </div>
-            <div class="right-part pe-0">
+            <div class="right-part w-100 pe-0">
                 <div class="dropdown">
                     <a class="user-profile-button dropdown-toggle" href="#" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="profile-container">
+                        <div class="profile-container ms-auto">
                             <div class="profile-picture-wrapper">
                                 <img th:src="${user.getProfile_picture()}"
                                      class="profile-picture"
@@ -54,7 +56,7 @@
                 <div class="col-12">
                     <div class="topic-header-container">
                         <div class="left-part">
-                            <a href="/explore" class="d-flex align-items-center">
+                            <a href="/explore" class="d-flex align-items-center go-back">
                                 <img th:src="@{/icons/arrow.svg}" class="icon-arrow left me-3" alt="Arrow">
                                 <h3 class="mb-0">Go Back</h3>
                             </a>
@@ -78,19 +80,29 @@
                                 <div class="chat-room-container">
                                     <div class="chat-room-box">
                                         <div class="chat-room-inside">
-                                            <div class="top-container">
-                                                <div class="hosted">
-                                                    <p class="hosted-by">Hosted by</p>
-                                                    <p class="user" th:text="${room.getUser_id().getName()}"></p>
+                                            <div class="chat-room-details">
+                                                <div class="top-container">
+                                                    <div class="hosted">
+                                                        <div class="profile">
+                                                            <div class="profile-wrapper">
+                                                                <img th:src="${user.getProfile_picture()}"
+                                                                     th:alt="${user.getProfile_picture()}">
+                                                            </div>
+                                                            <div class="hosted-by-section">
+                                                                <p class="hosted-by">Hosted by</p>
+                                                                <p class="user" th:text="${room.getUser_id().getName()}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="topic-wrapper">
+                                                        <p class="topic mini mb-0"
+                                                           th:text="${topic.getName()}"></p>
+                                                    </div>
                                                 </div>
-                                                <div class="topic-wrapper">
-                                                    <a href="#" class="topic mini" role="button"
-                                                       th:text="${topic.getName()}"></a>
+                                                <div class="room-info-container">
+                                                    <h6 class="title" th:text="${room.getName()}"></h6>
+                                                    <p class="description" th:text="${room.getDescription()}"></p>
                                                 </div>
-                                            </div>
-                                            <div class="room-info-container">
-                                                <h6 class="title" th:text="${room.getName()}"></h6>
-                                                <p class="description" th:text="${room.getDescription()}"></p>
                                             </div>
                                             <a th:href="@{/video/{meetingId}(meetingId = ${room.getMeetingId()})}">
                                                 <button class="button green-full w-100">Let’s Join 🎉</button>
@@ -115,7 +127,7 @@
                                         <h3 class="title text-white">
                                             No <strong>conversations</strong> found,
                                             Be first, and start <strong>your own.</strong></h3>
-                                        <a href="/start-convrsation">
+                                        <a href="/start-convrsation" class="button-tag">
                                             <button class="button white-full green mt-3">Start Conversation</button>
                                         </a>
                                     </div>

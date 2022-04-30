@@ -101,19 +101,29 @@
                                 <div class="chat-room-container">
                                     <div class="chat-room-box">
                                         <div class="chat-room-inside">
-                                            <div class="top-container">
-                                                <div class="hosted">
-                                                    <p class="hosted-by">Hosted by</p>
-                                                    <p class="user" th:text="${room.getUser_id().getName()}"></p>
+                                            <div class="chat-room-details">
+                                                <div class="top-container">
+                                                    <div class="hosted">
+                                                        <div class="profile">
+                                                            <div class="profile-wrapper">
+                                                                <img th:src="${user.getProfile_picture()}"
+                                                                     th:alt="${user.getProfile_picture()}">
+                                                            </div>
+                                                            <div class="hosted-by-section">
+                                                                <p class="hosted-by">Hosted by</p>
+                                                                <p class="user" th:text="${room.getUser_id().getName()}"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="topic-wrapper">
+                                                        <p class="topic mini mb-0"
+                                                           th:text="${topic.getName()}"></p>
+                                                    </div>
                                                 </div>
-                                                <div class="topic-wrapper">
-                                                    <a href="#" class="topic mini" role="button"
-                                                       th:text="${topic.getName()}"></a>
+                                                <div class="room-info-container">
+                                                    <h6 class="title" th:text="${room.getName()}"></h6>
+                                                    <p class="description" th:text="${room.getDescription()}"></p>
                                                 </div>
-                                            </div>
-                                            <div class="room-info-container">
-                                                <h6 class="title" th:text="${room.getName()}"></h6>
-                                                <p class="description" th:text="${room.getDescription()}"></p>
                                             </div>
                                             <a th:href="@{/video/{meetingId}(meetingId = ${room.getMeetingId()})}">
                                                 <button class="button green-full w-100">Let’s Join 🎉</button>
