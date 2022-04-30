@@ -1,6 +1,9 @@
 package com.buddiend.buddiend.controllers;
 
 import com.buddiend.buddiend.services.AuthService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +24,13 @@ public class ForgotPasswordController {
 
     @GetMapping
     public String showForgotPasswordPage() {
-        return "forgot-password";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "forgot-password";
+        }
+
+        return "redirect:/";
     }
 
     @PostMapping
