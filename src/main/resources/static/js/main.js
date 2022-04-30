@@ -1,7 +1,3 @@
-// $(function() {
-//     alert("HI");
-// });
-
 const createNewVideoChat = async () => {
     event.preventDefault();
 
@@ -41,7 +37,7 @@ const getToken = async () => {
                 "Content-Type": "application/json",
             },
         });
-        const { token } = await response.json();
+        const {token} = await response.json();
         return token;
     } catch (e) {
         console.log(e);
@@ -57,7 +53,7 @@ const getMeetingId = async (token) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ token, region: "sg001" }),
+            body: JSON.stringify({token, region: "sg001"}),
         };
         return await fetch(VIDEOSDK_API_ENDPOINT, options)
             .then(async (result) => {
@@ -80,7 +76,7 @@ const validateMeeting = async (token, meetingId) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ token }),
+            body: JSON.stringify({token}),
         };
         return await fetch(VIDEOSDK_API_ENDPOINT, options)
             .then(async (result) => {

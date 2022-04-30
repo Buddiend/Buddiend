@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+            integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script></head>
 <body>
 <nav class="navbar">
@@ -31,13 +34,12 @@
                         <form th:action="@{/verify}" method="post">
                             <div class="form-input">
                                 <input type="hidden" th:value="${session.user_to_register}" name="email">
-                                <input
-                                        id="verification_code" class="input-field" required
-                                        autofocus="autofocus"
-                                        type="text"
-                                        name="verification_code"/>
+                                <div class="d-flex align-items-center justify-content-between" id="verifyInput">
+
+                                </div>
                             </div>
-                            <button type="submit" class="button purple-full w-100">Verify</button>
+                            <input hidden id="verify" name="verification_code" value=""/>
+                            <button type="submit" class="button purple-full w-100" id="submitVerify">Verify</button>
                         </form>
                         <form th:action="@{/verify/resend}" th:method="put" id="resendForm">
                             <div class="form-group">
@@ -74,6 +76,64 @@
         debugger;
 
     })
+
+    const $otp_length = 6;
+
+    const element = document.getElementById('verifyInput');
+    for (let i = 0; i < $otp_length; i++) {
+        let inputField = document.createElement('input');
+        inputField.className = "input-field verify";
+        inputField.id = 'verify-field' + i;
+        inputField.maxLength = 1;
+        element.appendChild(inputField);
+    }
+
+    /*  This is for switching back and forth the input box for user experience */
+    const inputs = document.querySelectorAll('#verifyInput > *[id]');
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('keydown', function(event) {
+            if (event.key === "Backspace") {
+
+                if (inputs[i].value === '') {
+                    if (i !== 0) {
+                        inputs[i - 1].focus();
+                    }
+                } else {
+                    inputs[i].value = '';
+                }
+
+            } else if (event.key === "ArrowLeft" && i !== 0) {
+                inputs[i - 1].focus();
+            } else if (event.key === "ArrowRight" && i !== inputs.length - 1) {
+                inputs[i + 1].focus();
+            } else if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+                inputs[i].setAttribute("type", "text");
+                inputs[i].value = ''; // Bug Fix: allow user to change a random otp digit after pressing it
+                // setTimeout(function() {
+                //     inputs[i].setAttribute("type", "password");
+                // }, 1000);
+            }
+        });
+        inputs[i].addEventListener('input', function() {
+            inputs[i].value = inputs[i].value.toUpperCase();
+            if (i === inputs.length - 1 && inputs[i].value !== '') {
+                return true;
+            } else if (inputs[i].value !== '') {
+                inputs[i + 1].focus();
+            }
+        });
+
+    }
+
+    document.getElementById('submitVerify').addEventListener("click", function() {
+        const inputs = document.querySelectorAll('#verifyInput > *[id]');
+        let compiledOtp = '';
+        for (let i = 0; i < inputs.length; i++) {
+            compiledOtp += inputs[i].value;
+        }
+        document.getElementById('verify').value = compiledOtp;
+        return true;
+    });
 </script>
 </body>
 </html>
