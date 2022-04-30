@@ -8,8 +8,6 @@ const createNewVideoChat = async () => {
     const topicId = document.getElementsByName("topicId")[0].value;
     const languageId = document.getElementsByName("languageId")[0].value;
 
-    console.log(token, meetingId, title, description, topicId, languageId)
-
     const options = {
         method: "POST",
         body: JSON.stringify({
@@ -21,9 +19,11 @@ const createNewVideoChat = async () => {
         })
     }
 
+    const url = window.location.origin;
+
     fetch('/start-conversation', options)
         .then((result) => {
-            console.log(result);
+            window.location.replace(url + '/video/' + meetingId);
         })
         .catch((error) => console.log(error))
 }

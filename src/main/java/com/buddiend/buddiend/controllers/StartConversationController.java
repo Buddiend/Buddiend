@@ -45,7 +45,7 @@ public class StartConversationController {
     }
 
     @PostMapping
-    public String startConversation(@RequestBody String requestBody) throws ParseException {
+    public void startConversation(@RequestBody String requestBody) throws ParseException {
         JSONParser parser = new JSONParser();
         String title;
         String description;
@@ -65,7 +65,5 @@ public class StartConversationController {
         String email = ((UserDetails)principal).getUsername();
 
         this.chatRoomService.createChatRoom(title,description,topicId,languageId,email,meetingId);
-
-        return "redirect:/video/" + meetingId;
     }
 }
