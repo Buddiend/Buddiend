@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5">
                     <div class="verification-wrapper text-center">
-                        <h2>Verification code has been sent to your email 📩</h2>
+                        <h1 class="mb-5">Verification code is sent to your email 📩</h1>
                         <form th:action="@{/verify}" method="post">
                             <div class="form-input">
                                 <input type="hidden" th:value="${session.user_to_register}" name="email">
