@@ -17,9 +17,11 @@
     <div class="container">
         <div class="navbar-header w-100 d-flex align-items-center pt-3 pb-3">
             <div class="left-part w-100">
-                <a class="navbar-brand mr-auto" href="/explore">
-                    <img th:src="@{/images/logo-black.svg}" class="logo" alt="Logo">
-                </a>
+                <div class="mr-auto">
+                    <a class="navbar-brand button-tag" href="/explore">
+                        <img th:src="@{/images/logo-black.svg}" class="logo" alt="Logo">
+                    </a>
+                </div>
             </div>
             <div class="middle-part mx-auto">
                 <a th:href="@{/start-conversation}" class="button-tag">
@@ -27,22 +29,24 @@
                 </a>
             </div>
             <div class="right-part w-100 pe-0">
-                <div class="dropdown">
-                    <a class="user-profile-button dropdown-toggle" href="#" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="profile-container ms-auto">
-                            <div class="profile-picture-wrapper">
-                                <img th:src="${user.getProfile_picture()}"
-                                     class="profile-picture"
-                                     alt="Profile Picture">
+                <div class="dropdown text-end">
+                    <div class="ms-auto"style="display: inline-block">
+                        <a class="user-profile-button dropdown-toggle" href="#" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-container ms-auto">
+                                <div class="profile-picture-wrapper">
+                                    <img th:src="${user.getProfile_picture()}"
+                                         class="profile-picture"
+                                         alt="Profile Picture">
+                                </div>
+                                <p class="mb-0 profile-username fw-semi-bold" th:text="${'@' + user.getUsername()}"></p>
                             </div>
-                            <p class="mb-0 profile-username fw-semi-bold" th:text="${'@' + user.getUsername()}"></p>
-                        </div>
-                        <img th:src="@{/icons/arrow.svg}" class="icon-arrow" alt="Arrow">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
-                        <li><a class="dropdown-item" th:href="@{/profile}">My Profile</a></li>
-                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
-                    </ul>
+                            <img th:src="@{/icons/arrow.svg}" class="icon-arrow" alt="Arrow">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-item" th:href="@{/profile}">My Profile</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
