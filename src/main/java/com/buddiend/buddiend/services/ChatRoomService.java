@@ -14,4 +14,7 @@ public interface ChatRoomService {
     Optional<ChatRoom> findByMeetingId(String meetingId);
     List<ChatRoom> findByTopics(List<Topic> topics);
     Optional<ChatRoom> createChatRoom(String title, String description, Long topicId, Long languageId, String email, String meetingId);
+    List<Topic> findAllTopics();
+    List<ChatRoom> findAllWithLimit();
+
 }

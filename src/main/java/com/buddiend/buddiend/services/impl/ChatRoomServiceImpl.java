@@ -90,4 +90,28 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
         return Optional.of(this.chatRoomsRepository.save(chatRoom));
     }
+
+    @Override
+    public List<Topic> findAllTopics() {
+        List<Topic> topics = new ArrayList<>();
+        List<Long> topic_idList = this.chatRoomsRepository.findAllTopics();
+
+        topic_idList.forEach(el -> {
+            topics.add(this.topicRepository.findById(el).orElseThrow(() -> new TopicNotFoundException(el)));
+        });
+
+        return topics;
+    }
+
+    @Override
+    public List<ChatRoom> findAllWithLimit() {
+        List<ChatRoom> chatRoomsToSend = new ArrayList<>();
+        List<Long> topicIds = this.chatRoomsRepository.findAllTopics();
+        topicIds.forEach(el->{
+            this.chatRoomsRepository.findByIdWithLimit(el).forEach(chatRoomsToSend::add);
+        });
+
+
+        return chatRoomsToSend;
+    }
 }

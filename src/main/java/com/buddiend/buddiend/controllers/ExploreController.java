@@ -46,11 +46,15 @@ public class ExploreController {
             return "redirect:/verify";
         }
 
-        List<Topic> selectedTopics = this.topicService.findSelected(email);
-        List<ChatRoom> chatRooms = this.chatRoomService.findByTopics(selectedTopics);
+//        List<Topic> selectedTopics = this.topicService.findSelected(email);
+//        List<ChatRoom> chatRooms = this.chatRoomService.findByTopics(selectedTopics);
+//        model.addAttribute("subscribedTopics", selectedTopics);
+
+        List<ChatRoom> chatRooms = this.chatRoomService.findAllWithLimit();
+        List<Topic> topicsThatHaveChatRooms = this.chatRoomService.findAllTopics();
 
         model.addAttribute("topics", this.topicService.findAll());
-        model.addAttribute("subscribedTopics", selectedTopics);
+        model.addAttribute("topicsThatHaveChatRooms", topicsThatHaveChatRooms);
         model.addAttribute("chatRooms", chatRooms);
         model.addAttribute("user", this.userService.findByEmail(email));
 
