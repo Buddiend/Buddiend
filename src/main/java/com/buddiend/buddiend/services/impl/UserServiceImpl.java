@@ -94,7 +94,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createPasswordResetToken(User user, String token) {
+        //Delete the old token then create new one - to prevent 2 active tokens at the same time :))
+        Optional<PasswordReset> oldToken = this.passwordResetRepository.findByUser(user);
+        oldToken.ifPresent(this.passwordResetRepository::delete);
+
+
         PasswordReset newToken = new PasswordReset(user, token);
+        try {
+            this.emailService.sendForgotPasswordEmail(user, "Reset Password", token);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         this.passwordResetRepository.save(newToken);
     }
 

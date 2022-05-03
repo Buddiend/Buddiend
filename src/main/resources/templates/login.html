@@ -42,6 +42,10 @@
                                 <div class="alert alert-info">You have been logged out.</div>
                             </div>
 
+                            <div th:if="${param.forgotPassSuccess}">
+                                <div class="alert alert-info">An email with the link has been sent to you.</div>
+                            </div>
+
                             <div class="form-input">
                                 <label for="email" class="input-desc">Email</label>
                                 <input type="email" class="input-field w-100" id="email" name="email"

@@ -18,6 +18,17 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender mailSender;
     private final String fromAddress;
     private final String senderName;
+    private String verificationContent = "Dear [[name]],<br>"
+            + "Here is your verification code to verify your account:<br>"
+            + "<h3>\"[[VERIFICATION_CODE]]\"</h3>"
+            + "Thank you,<br>"
+            + "Buddiend.";
+
+    private String forgotPasswordContent = "Dear [[name]],<br>"
+            + "Here is link to reset your account password:<br>"
+            + "<a href = \"[[TOKEN]]\"> Link </a>"
+            + "Thank you,<br>"
+            + "Buddiend.";
 
 
     public EmailServiceImpl(JavaMailSender mailSender) {
@@ -30,11 +41,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendVerificationEmail(User user, String subject)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
-        String content = "Dear [[name]],<br>"
-                + "Here is your verification code to verify your account:<br>"
-                + "<h3>\"[[VERIFICATION_CODE]]\"</h3>"
-                + "Thank you,<br>"
-                + "Buddiend.";
+        String content = this.verificationContent;
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -50,6 +57,29 @@ public class EmailServiceImpl implements EmailService {
         helper.setText(content, true);
 
         mailSender.send(message);
+    }
 
+    @Override
+    public void sendForgotPasswordEmail(User user, String subject, String token)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String content = this.forgotPasswordContent;
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getName());
+
+//        String link = "https://buddiend.com/password/reset/" + token;  --For Browser
+        String link = "http://localhost:9090/password/reset/" + token;
+        content = content.replace("[[TOKEN]]", link);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
     }
 }

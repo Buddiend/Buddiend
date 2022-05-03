@@ -7,26 +7,29 @@ import com.buddiend.buddiend.models.dto.ResetPasswordDto;
 import com.buddiend.buddiend.models.exceptions.InvalidTokenException;
 import com.buddiend.buddiend.models.exceptions.PasswordMatchException;
 import com.buddiend.buddiend.repositories.PasswordResetRepository;
+import com.buddiend.buddiend.repositories.UserRepository;
 import com.buddiend.buddiend.services.AuthService;
 import com.buddiend.buddiend.services.UserService;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Service
 public class AuthServiceImpl implements AuthService {
     private final UserService userService;
+    private final UserRepository userRepository;
     private final PasswordResetRepository passwordResetRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public AuthServiceImpl(UserService userService, PasswordResetRepository passwordResetRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(UserService userService, UserRepository userRepository, PasswordResetRepository passwordResetRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.userRepository = userRepository;
         this.passwordResetRepository = passwordResetRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -47,22 +50,23 @@ public class AuthServiceImpl implements AuthService {
         }
 
         user.setPassword(passwordEncoder.encode(resetPasswordDto.getPassword()));
+        this.userRepository.save(user);
     }
-
-    @Override
-    public void changePassword(ChangePasswordDto changePasswordDto) {
-        User user = getUserFromEmail(this.userService.getUser().getUsername());
-
-        if (!changePasswordDto.getPassword().equals(changePasswordDto.getPasswordConfirmation())) {
-            throw new PasswordMatchException("Password's do not match!");
-        }
-
-        if (!BCrypt.checkpw(changePasswordDto.getPassword(), user.getPassword())) {
-            throw new PasswordMatchException("The new password can't be the same as the old one.");
-        }
-
-        user.setPassword(passwordEncoder.encode(changePasswordDto.getPassword()));
-    }
+//
+//    @Override
+//    public void changePassword(ChangePasswordDto changePasswordDto) {
+//        User user = getUserFromEmail(this.userService.getUser().getUsername());
+//
+//        if (!changePasswordDto.getPassword().equals(changePasswordDto.getPasswordConfirmation())) {
+//            throw new PasswordMatchException("Password's do not match!");
+//        }
+//
+//        if (!BCrypt.checkpw(changePasswordDto.getPassword(), user.getPassword())) {
+//            throw new PasswordMatchException("The new password can't be the same as the old one.");
+//        }
+//
+//        user.setPassword(passwordEncoder.encode(changePasswordDto.getPassword()));
+//    }
 
     @Override
     public boolean validateToken(String token) {
@@ -80,7 +84,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private boolean isTokenValid(PasswordReset passwordReset) {
-        long diff = ChronoUnit.HOURS.between(passwordReset.getCreated_at(), LocalDateTime.now());
+        long diff = ChronoUnit.HOURS.between(passwordReset.getCreated_at().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), LocalDateTime.now());
         return diff <= 1;
     }
 

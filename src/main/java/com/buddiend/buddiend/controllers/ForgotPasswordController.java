@@ -34,7 +34,8 @@ public class ForgotPasswordController {
     }
 
     @PostMapping
-    public void forgotPassword(@Email @RequestParam("email") String email) {
+    public String forgotPassword(@Email @RequestParam("email") String email) {
         this.authService.forgotPassword(email);
+        return "redirect:/login?forgotPassSuccess";
     }
 }

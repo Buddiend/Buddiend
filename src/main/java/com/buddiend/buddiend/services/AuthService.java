@@ -7,7 +7,7 @@ import com.buddiend.buddiend.models.dto.ResetPasswordDto;
 public interface AuthService {
     void forgotPassword(String email);
     void resetPassword(ResetPasswordDto resetPasswordDto);
-    void changePassword(ChangePasswordDto changePasswordDto);
+//    void changePassword(ChangePasswordDto changePasswordDto);
     boolean validateToken(String token);
     void delete(User user);
 

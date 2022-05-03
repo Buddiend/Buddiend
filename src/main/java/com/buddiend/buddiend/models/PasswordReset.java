@@ -2,10 +2,12 @@ package com.buddiend.buddiend.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,8 +25,9 @@ public class PasswordReset {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-    @CreatedDate
-    private LocalDateTime created_at;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created_at;
 
     public PasswordReset(User user, String token) {
         this.user = user;
