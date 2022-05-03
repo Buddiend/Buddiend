@@ -74,8 +74,8 @@ public class EmailServiceImpl implements EmailService {
 
         content = content.replace("[[name]]", user.getName());
 
-//        String link = "https://buddiend.com/password/reset/" + token;  --For Browser
-        String link = "http://localhost:9090/password/reset/" + token;
+        String link = "https://buddiend.com/password/reset/" + token;  //For Browser
+//        String link = "http://localhost:9090/password/reset/" + token; //For Localhost
         content = content.replace("[[TOKEN]]", link);
 
         helper.setText(content, true);
