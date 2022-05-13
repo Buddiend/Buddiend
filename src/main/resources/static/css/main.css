@@ -152,6 +152,13 @@ form .form-input:last-child {
   color: #8323E0;
   border: 1px solid #8323E0;
 }
+.button.black-full {
+  background-color: #1D1E1F;
+  color: #FFF;
+}
+.button.black-full:hover {
+  background-color: #8323E0;
+}
 .button.green-full {
   background-color: #0DC04A;
   color: #FFFF;
@@ -316,6 +323,21 @@ form .form-input:last-child {
 }
 .page section.first {
   padding: 20px 0 80px;
+}
+.page.home {
+  height: calc(100vh - 160px);
+}
+.page.home section.home .home-background {
+  min-height: 860px;
+  background: url("/images/home-bg.jpg") no-repeat;
+  background-size: cover;
+  border-radius: 16px;
+}
+.page.home section.home .home-background .people-container .people-boxes {
+  background: url("/images/people-boxes.png") no-repeat;
+  background-size: cover;
+  height: 650px;
+  width: 100%;
 }
 .page.explore section.topics .topics-wrapper .topic-cards {
   display: grid;

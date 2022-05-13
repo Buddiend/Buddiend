@@ -205,6 +205,15 @@ form {
         }
     }
 
+    &.black-full {
+        background-color: @colorBlack;
+        color: #FFF;
+
+        &:hover {
+            background-color: @colorPurple;
+        }
+    }
+
     &.green-full {
         background-color: @colorGreen;
         color: #FFFF;
@@ -411,6 +420,30 @@ form {
 
         &.first {
             padding: 20px 0 80px;
+        }
+    }
+
+    &.home {
+        height: ~"calc(100vh - 160px)";
+
+        section {
+            &.home {
+                .home-background {
+                    min-height: 860px;
+                    background: url("/images/home-bg.jpg") no-repeat;
+                    background-size: cover;
+                    border-radius: 16px;
+
+                    .people-container {
+                        .people-boxes {
+                            background: url("/images/people-boxes.png") no-repeat;
+                            background-size: cover;
+                            height: 650px;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
         }
     }
 
