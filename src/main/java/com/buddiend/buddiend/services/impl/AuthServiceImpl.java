@@ -2,7 +2,6 @@ package com.buddiend.buddiend.services.impl;
 
 import com.buddiend.buddiend.models.PasswordReset;
 import com.buddiend.buddiend.models.User;
-import com.buddiend.buddiend.models.dto.ChangePasswordDto;
 import com.buddiend.buddiend.models.dto.ResetPasswordDto;
 import com.buddiend.buddiend.models.exceptions.InvalidTokenException;
 import com.buddiend.buddiend.models.exceptions.PasswordMatchException;
@@ -11,7 +10,6 @@ import com.buddiend.buddiend.repositories.UserRepository;
 import com.buddiend.buddiend.services.AuthService;
 import com.buddiend.buddiend.services.UserService;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,21 +50,6 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(resetPasswordDto.getPassword()));
         this.userRepository.save(user);
     }
-//
-//    @Override
-//    public void changePassword(ChangePasswordDto changePasswordDto) {
-//        User user = getUserFromEmail(this.userService.getUser().getUsername());
-//
-//        if (!changePasswordDto.getPassword().equals(changePasswordDto.getPasswordConfirmation())) {
-//            throw new PasswordMatchException("Password's do not match!");
-//        }
-//
-//        if (!BCrypt.checkpw(changePasswordDto.getPassword(), user.getPassword())) {
-//            throw new PasswordMatchException("The new password can't be the same as the old one.");
-//        }
-//
-//        user.setPassword(passwordEncoder.encode(changePasswordDto.getPassword()));
-//    }
 
     @Override
     public boolean validateToken(String token) {

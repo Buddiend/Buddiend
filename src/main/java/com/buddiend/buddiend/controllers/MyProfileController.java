@@ -32,7 +32,6 @@ public class MyProfileController {
         model.addAttribute("user", userToShow);
         model.addAttribute("isEditingMode", false);
 
-
         return "my-profile";
     }
 

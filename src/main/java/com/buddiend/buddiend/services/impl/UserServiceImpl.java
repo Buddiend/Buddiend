@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createPasswordResetToken(User user, String token) {
-        //Delete the old token then create new one - to prevent 2 active tokens at the same time :))
+        //Delete the old token then create new one - to prevent 2 active tokens at the same time
         Optional<PasswordReset> oldToken = this.passwordResetRepository.findByUser(user);
         oldToken.ifPresent(this.passwordResetRepository::delete);
 

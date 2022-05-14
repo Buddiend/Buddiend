@@ -13,7 +13,13 @@ public class MainController {
 
     @GetMapping
     public String showHomePage() {
-        return "home";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "home";
+        }
+
+        return "redirect:/explore";
     }
 
     @GetMapping("login")

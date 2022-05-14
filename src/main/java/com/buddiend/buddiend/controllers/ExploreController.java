@@ -46,10 +46,6 @@ public class ExploreController {
             return "redirect:/verify";
         }
 
-//        List<Topic> selectedTopics = this.topicService.findSelected(email);
-//        List<ChatRoom> chatRooms = this.chatRoomService.findByTopics(selectedTopics);
-//        model.addAttribute("subscribedTopics", selectedTopics);
-
         List<ChatRoom> chatRooms = this.chatRoomService.findAllWithLimit();
         List<Topic> topicsThatHaveChatRooms = this.chatRoomService.findAllTopics();
 

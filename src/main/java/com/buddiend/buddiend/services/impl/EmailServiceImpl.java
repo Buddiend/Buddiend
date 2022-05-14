@@ -33,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
 
     public EmailServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;
-        this.senderName = "Buddiend";;
+        this.senderName = "Buddiend";
         this.fromAddress = "bojansimiciev@gmail.com";
     }
 

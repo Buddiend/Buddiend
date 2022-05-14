@@ -96,9 +96,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         List<Topic> topics = new ArrayList<>();
         List<Long> topic_idList = this.chatRoomsRepository.findAllTopics();
 
-        topic_idList.forEach(el -> {
-            topics.add(this.topicRepository.findById(el).orElseThrow(() -> new TopicNotFoundException(el)));
-        });
+        topic_idList.forEach(el -> topics.add(this.topicRepository.findById(el).orElseThrow(() -> new TopicNotFoundException(el))));
 
         return topics;
     }
@@ -107,10 +105,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     public List<ChatRoom> findAllWithLimit() {
         List<ChatRoom> chatRoomsToSend = new ArrayList<>();
         List<Long> topicIds = this.chatRoomsRepository.findAllTopics();
-        topicIds.forEach(el->{
-            this.chatRoomsRepository.findByIdWithLimit(el).forEach(chatRoomsToSend::add);
-        });
-
+        topicIds.forEach(el-> chatRoomsToSend.addAll(this.chatRoomsRepository.findByIdWithLimit(el)));
 
         return chatRoomsToSend;
     }

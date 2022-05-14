@@ -1,9 +1,6 @@
 package com.buddiend.buddiend.controllers;
 
 import com.buddiend.buddiend.services.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
@@ -23,13 +20,8 @@ public class VerificationController {
     @GetMapping
     public String getVerificationPage(HttpServletRequest request) {
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Object principal = authentication.getPrincipal();
-//        String email = ((UserDetails)principal).getUsername();
-
         if(request.getSession().getAttribute("user_to_register") == null){
             return "redirect:/explore";
-            //throw new IllegalAccessException();
         }
 
         return "verify";

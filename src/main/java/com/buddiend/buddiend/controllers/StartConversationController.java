@@ -53,7 +53,7 @@ public class StartConversationController {
         long languageId;
         String meetingId;
 
-        JSONObject jsonBody = (JSONObject) parser.parse(requestBody.toString());
+        JSONObject jsonBody = (JSONObject) parser.parse(requestBody);
         title = (String) jsonBody.get("title");
         description = (String) jsonBody.get("description");
         topicId = Long.parseLong((String) jsonBody.get("topicId"));
