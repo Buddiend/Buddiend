@@ -57,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
         return isTokenValid(passwordReset);
     }
 
+    //TODO: Write this for some next version hahahha
     @Override
     public void delete(User user) {
 

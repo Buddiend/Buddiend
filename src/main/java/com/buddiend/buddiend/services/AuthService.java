@@ -7,6 +7,6 @@ public interface AuthService {
     void forgotPassword(String email);
     void resetPassword(ResetPasswordDto resetPasswordDto);
     boolean validateToken(String token);
-//    void delete(User user);
+    void delete(User user);
 
 }
