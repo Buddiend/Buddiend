@@ -83,8 +83,11 @@
                         <div class="topic-cards">
                             <a  th:href="@{/explore/topic/{id}(id=${topic.getId()})}" class="topic" role="button" th:each="topic:${topics}"
                                >
-                                <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" class="topic-logos cards" alt="topic">
-                                <p th:text="${topic.getName()}"></p>
+                                <div class="topic-cards-inside d-flex align-items-center justify-content-center">
+                                    <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" class="topic-logos cards" alt="topic">
+                                    <!--                                <img th:src="@{/images/${topic.getImage()}}" class="topic-logos cards" alt="topic">-->
+                                    <p th:text="${topic.getName()}" class="mb-0"></p>
+                                </div>
                             </a>
                         </div>
                     </div>
