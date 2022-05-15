@@ -66,7 +66,7 @@
                             </a>
                         </div>
                         <div class="middle-part d-flex">
-                            <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" alt="topic" class="topic-logos details">
+                            <img th:src="@{${'/images/' + topic.getImage()}}" alt="topic" class="topic-logos details">
                             <h2 class="topic-title mb-0 fw-semi-bold" th:text="${topic.getName()}"></h2>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="topic-wrapper">
                                                         <p class="topic mini mb-0 d-flex">
-                                                            <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" alt="topic" class="topic-logos hosted">
+                                                            <img th:src="@{${'/images/' + topic.getImage()}}" alt="topic" class="topic-logos hosted">
                                                             <span th:text="${topic.getName()}"></span>
                                                         </p>
                                                     </div>

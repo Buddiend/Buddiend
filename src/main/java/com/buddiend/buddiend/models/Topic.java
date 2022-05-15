@@ -18,6 +18,9 @@ public class Topic {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String image;
+
     public Topic(Long id, String name) {
         this.id = id;
         this.name = name;
