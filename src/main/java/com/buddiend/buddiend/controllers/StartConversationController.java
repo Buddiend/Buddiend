@@ -31,6 +31,8 @@ public class StartConversationController {
         this.userService = userService;
     }
 
+
+    //TODO: When the request is coming from a certain topic set the option to that topic
     @GetMapping
     public String getStartConversationPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

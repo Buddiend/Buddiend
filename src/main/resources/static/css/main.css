@@ -227,6 +227,28 @@ form .form-input:last-child {
 .topic.mini:hover {
   color: #1D1E1F !important;
 }
+.topic-logos {
+  margin-right: 5px;
+}
+.topic-logos.cards {
+  width: 25px !important;
+}
+.topic-logos.imgs-with-chatrooms {
+  width: 35px;
+  height: 35px;
+}
+.topic-logos.hosted {
+  width: 15px !important;
+  height: 15px;
+}
+.topic-logos.details {
+  width: 35px;
+  height: 35px;
+}
+.topic-logos.dropdown {
+  width: 10px;
+  height: 10px;
+}
 .chat-room-container .chat-room-box {
   background: #FFFFFF;
   box-shadow: 0 4px 14px 4px rgba(0, 0, 0, 0.05);

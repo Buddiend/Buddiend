@@ -82,7 +82,10 @@
                         </div>
                         <div class="topic-cards">
                             <a  th:href="@{/explore/topic/{id}(id=${topic.getId()})}" class="topic" role="button" th:each="topic:${topics}"
-                               th:text="${topic.getName()}"></a>
+                               >
+                                <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" class="topic-logos cards" alt="topic">
+                                <p th:text="${topic.getName()}"></p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -95,7 +98,10 @@
                 <div class="col-12">
                     <div class="chat-room-wrapper">
                         <div class="top-container d-flex justify-content-between align-items-center">
-                            <h2 class="section-title fw-semi-bold mb-0" th:text="${topic.getName()}"></h2>
+                            <div class="d-flex">
+                                <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" alt="topic" class="topic-logos imgs-with-chatrooms">
+                                <h2 class="section-title fw-semi-bold mb-0" th:text="${topic.getName()}"></h2>
+                            </div>
                             <a th:href="@{/explore/topic/{id}(id=${topic.getId()})}">
                                 <button class="button purple-outline">View All</button>
                             </a>
@@ -122,8 +128,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="topic-wrapper">
-                                                        <p class="topic mini mb-0"
-                                                           th:text="${topic.getName()}"></p>
+                                                        <p class="topic mini mb-0 d-flex">
+                                                            <img th:src="@{${'/images/topic-' + topic.getName() + '.png'}}" alt="topic" class="topic-logos hosted">
+                                                            <span th:text="${topic.getName()}"></span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="room-info-container">
