@@ -79,6 +79,7 @@ public class User implements UserDetails {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.profile_picture = "https://avatars.dicebear.com/api/gridy/" + username + ".svg";
         this.verification_code = RandomString.make(6).toUpperCase();
         this.verification_code_created_at = LocalDateTime.now();
     }
